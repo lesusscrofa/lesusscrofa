@@ -1,0 +1,10 @@
+spring:
+  jpa: 
+    show-sql: true
+  properties:
+   hibernate:
+    format_sql: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/suscrofa
+    username: suscrofa_adm
+    password: password

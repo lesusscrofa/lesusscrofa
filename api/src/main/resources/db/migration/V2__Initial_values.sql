@@ -1,0 +1,10 @@
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'SOUP', 1.5, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'DISH', 8.0, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'ALTERNATIVE_DISH', 8.0, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'DESSERT', 1.5, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'SOUP_DISH', 9.5, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'DISH_DESSERT', 9.5, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'MENU', 11.0, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'SOUP_ALTERNATIVE_DISH', 9.5, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'ALTERNATIVE_DISH_DESSERT', 9.5, 6);
+INSERT INTO formula_price (start_date, formula, price, vat) VALUES('2020-11-01', 'ALTERNATIVE_MENU', 11, 6);

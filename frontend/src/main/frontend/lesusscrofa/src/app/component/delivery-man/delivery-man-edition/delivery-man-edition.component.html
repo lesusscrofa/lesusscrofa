@@ -1,0 +1,33 @@
+<form [formGroup]="deliveryManEditionForm" novalidate (ngSubmit)="save()">
+    <mat-card>
+      <mat-card-title>
+        Livreur
+      </mat-card-title>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Prénom" type="text" formControlName="firstName">
+              <mat-error *ngIf="deliveryManEditionForm.controls['firstName'].hasError('required')">
+                Le prénom est <strong>obligatoire</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nom" type="text" formControlName="lastName">
+              <mat-error *ngIf="deliveryManEditionForm.controls['lastName'].hasError('required')">
+                Le nom est <strong>obligatoire</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button (click)="cancel()" type="reset">Annuler</button>
+        <button mat-raised-button color="primary" [disabled]="!deliveryManEditionForm.valid" type="submit">{{ deliveryManEditionForm.value['id'] != null ? 'Modifier' : 'Créer' }}</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>  

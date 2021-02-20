@@ -1,0 +1,10 @@
+<mat-form-field appearance="fill">
+    <mat-label>Date de livraison</mat-label>
+    <input matInput [matDatepicker]="picker" (dateChange)="dateChanged($event)" [formControl]="day">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<app-food-order-list [foodsOrders]="foodsOrders | async"></app-food-order-list>
+
+<app-remark-list [day]="day.value"></app-remark-list>

@@ -1,0 +1,25 @@
+<mat-form-field>
+  <mat-label>Autres</mat-label>
+  <mat-chip-list #chipList aria-label="Autres">
+    <mat-chip
+      *ngFor="let order of otherFoodsOrders"
+      [selectable]="true"
+      [removable]="true"
+      (removed)="removeOrder(order)"
+      (click)="modifyOrder(order)">
+      {{(order.other | async)?.name}} {{order.quantity}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input
+      placeholder="Ajouter aliment..."
+      #foodInput
+      [formControl]="foodControl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="newOrder($event)">
+    <mat-option *ngFor="let food of filteredFoods | async" [value]="food">
+      {{food.name}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

@@ -1,0 +1,23 @@
+<form [formGroup]="orderQuantityEditionForm" novalidate (ngSubmit)="save()">
+    <mat-card>
+        <mat-card-title>
+          Quantité
+        </mat-card-title>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Quantité" type="number" formControlName="quantity">
+                <mat-error *ngIf="orderQuantityEditionForm.controls['quantity'].hasError('required')">
+                  La quantité est <strong>obligatoire</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button (click)="cancel()" type="reset">Annuler</button>
+          <button mat-raised-button color="primary" [disabled]="!orderQuantityEditionForm.valid" type="submit">Sauver</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

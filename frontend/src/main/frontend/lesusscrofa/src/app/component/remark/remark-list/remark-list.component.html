@@ -1,0 +1,33 @@
+<div>Remarque</div>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="clientFirstName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </th>
+            <td mat-cell *matCellDef="let row"> {{row.clientFirstName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="clientLastName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+            <td mat-cell *matCellDef="let row"> {{row.clientLastName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="clientMessage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarque client </th>
+            <td mat-cell *matCellDef="let row"> {{row.clientMessage}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dailyMessage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarque commande du jour </th>
+            <td mat-cell *matCellDef="let row"> {{row.dailyMessage}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="foodsOrdersResume">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Commande </th>
+            <td mat-cell *matCellDef="let row"> {{row.foodsOrdersResume}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

@@ -1,0 +1,47 @@
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantité </th>
+            <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Uts </th>
+            <td mat-cell *matCellDef="let row"> {{row.unit}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unitPriceReductionIncluded">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix unitaire HTVA </th>
+            <td mat-cell *matCellDef="let row"> {{row.unitPriceReductionIncluded}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unitPriceVatIncluded">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix unitaire TVAC </th>
+            <td mat-cell *matCellDef="let row"> {{row.unitPriceVatIncluded}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vat">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> TVA %</th>
+            <td mat-cell *matCellDef="let row"> {{row.vat}} %</td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalVat">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> TVA </th>
+            <td mat-cell *matCellDef="let row"> {{row.totalVat}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalVatIncluded">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total TTC </th>
+            <td mat-cell *matCellDef="let row"> {{row.totalVatIncluded}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

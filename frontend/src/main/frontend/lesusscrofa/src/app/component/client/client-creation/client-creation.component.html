@@ -1,0 +1,45 @@
+<form [formGroup]="clientForm" (ngSubmit)="save()">
+    <mat-card>
+        <mat-card-title>
+            Création client
+          </mat-card-title>
+          <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                    <input matInput placeholder="Prénom" type="text" formControlName="firstName">
+                    <mat-error *ngIf="clientForm.controls['firstName'].hasError('required')">
+                        La prénom est <strong>obligatoire</strong>
+                    </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Nom" type="text" formControlName="lastName">
+                        <mat-error *ngIf="clientForm.controls['lastName'].hasError('required')">
+                            La nom est <strong>obligatoire</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field class="full-width">
+                  <mat-select placeholder="Zonde de livraison" formControlName="deliveryZoneId">
+                      <mat-option *ngFor="let deliveryZone of deliveryZones | async" [value]="deliveryZone.id">
+                          {{ deliveryZone.name }}
+                      </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="clientForm.controls['lastName'].hasError('required')">
+                    La zone de livraison est <strong>obligatoire</strong>
+                   </mat-error>
+                </mat-form-field>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-flat-button (click)="cancel()" type="reset">Annuler</button>
+            <button mat-raised-button color="primary" [disabled]="!clientForm.valid" type="submit">Créer</button>
+          </mat-card-actions>
+    </mat-card>
+</form>

@@ -1,0 +1,13 @@
+<span *ngIf="auth.user$ | async as user">
+    Bienvenue {{ user.name }} 
+</span>
+
+<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+    <button (click)="auth.logout({ returnTo: document.location.origin })">
+        Se déconnecter
+    </button>
+</ng-container>
+
+<ng-template #loggedOut>
+    <button (click)="auth.loginWithRedirect()">Se connecter</button>
+</ng-template>

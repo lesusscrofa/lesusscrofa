@@ -1,0 +1,90 @@
+<form [formGroup]="foodEditionForm" novalidate (ngSubmit)="save()">
+    <mat-card>
+      <mat-card-title>
+        Aliment
+      </mat-card-title>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput placeholder="Nom" type="text" formControlName="name">
+              <mat-error *ngIf="foodEditionForm.controls['name'].hasError('required')">
+                Le nom est <strong>obligatoire</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Date de début</mat-label>
+              <input matInput placeholder="Date de début" type="date" formControlName="start" [matDatepicker]="startPicker">
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker></mat-datepicker>
+              <mat-error *ngIf="foodEditionForm.controls['start'].hasError('required')">
+                La date de début est <strong>obligatoire</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Date de fin</mat-label>
+              <input matInput placeholder="Date de fin" type="date" formControlName="end" [matDatepicker]="endPicker">
+              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+              <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Prix</mat-label>
+              <input matInput placeholder="Prix" type="number" formControlName="price">
+              <mat-error *ngIf="foodEditionForm.controls['price'].hasError('required')">
+                Le prix est <strong>obligatoire</strong>
+              </mat-error>
+              <mat-error *ngIf="foodEditionForm.controls['price'].hasError('min')">
+                La ne peut être en dessous de <strong>0</strong> %
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>TVA</mat-label>
+              <mat-select placeholder="TVA" formControlName="vat">
+                <mat-option *ngFor="let vatValue of vatValues" [value]="vatValue">
+                    {{ vatValue }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="foodEditionForm.controls['vat'].hasError('required')">
+                La tva est <strong>obligatoire</strong>
+              </mat-error>
+              <mat-error *ngIf="foodEditionForm.controls['vat'].hasError('min') || foodEditionForm.controls['vat'].hasError('max')">
+                La tva doit est comprise entre <strong>0 et 100</strong> %
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Unité</mat-label>
+              <mat-select placeholder="Unité" formControlName="unit">
+                <mat-option *ngFor="let unitValue of unitValues" [value]="unitValue">
+                    {{ unitValue }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="foodEditionForm.controls['unit'].hasError('maxLength')">
+                La taille maximale de l'unité est de <strong>10 caractères</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button (click)="cancel()" type="reset">Annuler</button>
+        <button mat-raised-button color="primary" [disabled]="!foodEditionForm.valid" type="submit">{{ foodEditionForm.value['id'] != null ? 'Modifier' : 'Créer' }}</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>  

@@ -1,0 +1,20 @@
+<form>
+    <mat-form-field>
+        <input matInput
+                placeholder="Rechercher un client"
+                aria-label="Client"
+                [matAutocomplete]="auto"
+                [formControl]="searchControl">
+        <mat-autocomplete 
+            #auto="matAutocomplete" 
+            [displayWith]="getClientName" 
+            (optionSelected)="client = searchControl.value">
+            <mat-option *ngFor="let client of clients$ | async" [value]="client">
+                {{client.firstName}} {{client.lastName}}
+            </mat-option>
+        </mat-autocomplete>
+        <button mat-button *ngIf="client" matSuffix mat-icon-button aria-label="Clear" (click)="client = null">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</form>

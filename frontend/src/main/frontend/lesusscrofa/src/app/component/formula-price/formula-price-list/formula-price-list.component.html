@@ -1,0 +1,64 @@
+<div class="mat-elevation-z8">
+  <form [formGroup]="searchPriceControl">
+    <span>Formule : </span>
+    <mat-select placeholder="Type de service" formControlName="formula">
+      <mat-option *ngFor="let formula of formulas" [value]="formula">
+          {{ formula | formulaToString }}
+      </mat-option>
+    </mat-select>
+  </form>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="start">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de début</th>
+      <td mat-cell *matCellDef="let row">{{row.start | date:"dd/MM/yyyy"}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="formula">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Formule</th>
+      <td mat-cell *matCellDef="let row">{{row.formula | formulaToString}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Prix</th>
+      <td mat-cell *matCellDef="let row">{{row.price}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="vat">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TVA</th>
+      <td mat-cell *matCellDef="let row">{{row.vat}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="(dataSource.data | async).length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+
+  <button mat-flat-button color="primary" [disabled]="selection.isEmpty()" (click)="editSelectedRow()">Editer</button>
+  <button mat-flat-button color="warn" [disabled]="selection.isEmpty()" (click)="deleteSelectedRow()">Supprimer</button>
+</div>

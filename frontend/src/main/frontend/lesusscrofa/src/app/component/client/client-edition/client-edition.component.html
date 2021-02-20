@@ -1,0 +1,113 @@
+<form [formGroup]="clientForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First name" formControlName="firstName">
+            <mat-error *ngIf="clientForm.controls['firstName'].hasError('required')">
+              Le prénom est <strong>obligatoire</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last name" formControlName="lastName">
+            <mat-error *ngIf="clientForm.controls['lastName'].hasError('required')">
+              Le nom est <strong>obligatoire</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address" formControlName="deliveryStreet"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput #deliveryZipCode maxlength="4" placeholder="Postal Code" type="number" formControlName="deliveryZipCode">
+            <mat-hint align="end">{{deliveryZipCode.value.length}} / 4</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="City" formControlName="deliveryCity">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Zone de livraison" formControlName="deliveryZoneId">
+              <mat-option *ngFor="let deliveryZone of deliveryZones | async" [value]="deliveryZone.id">
+                  {{ deliveryZone.name }}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <div class="row">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Téléphone" formControlName="deliveryPhone">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-checkbox [checked]="sameAddressForBilling" (change)="toggleSameAddressForBilling($event.checked)">
+            Adresse de facturation identique ?
+          </mat-checkbox>
+        </div>
+      </div>
+      <div class="row" *ngIf="!sameAddressForBilling">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address" formControlName="billingStreet"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="!sameAddressForBilling">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput #billingZipCode maxlength="4" placeholder="Postal Code" type="number" formControlName="billingZipCode">
+              <mat-hint align="end">{{billingZipCode.value.length}} / 4</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="City" formControlName="billingCity">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Téléphone" formControlName="billingPhone">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput maxlength="3" placeholder="Reduction" type="number" formControlName="reduction">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-checkbox [checked]="!clientForm.value.deliveryPreferenceTakeAway" (change)="clientForm.value.deliveryPreferenceTakeAway = !clientForm.value.deliveryPreferenceTakeAway">
+            Livraison à domicile ?
+          </mat-checkbox>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

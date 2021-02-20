@@ -1,0 +1,25 @@
+server:
+ port: ${PORT:8080}
+app:
+ web:
+  corsAllowedOrigin: 'http://localhost:4200'
+
+spring:
+ datasource:
+  url: ${JDBC_DATABASE_URL}
+  username: ${JDBC_DATABASE_USERNAME}
+  password: ${JDBC_DATABASE_PASSWORD}
+ security:
+   oauth2:
+    resourceserver:
+     jwt:
+      issuer-uri: https://dev-rlsy6dy0.eu.auth0.com/
+
+auth0:
+ audience: https://www.lesusscrofa.be/
+
+ jpa: 
+  show-sql: true
+  properties:
+   hibernate:
+    format_sql: true

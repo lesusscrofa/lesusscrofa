@@ -1,0 +1,47 @@
+<form [formGroup]="menuForm">
+    <mat-table [dataSource]="dataSource" formArrayName="entries">
+      <ng-container matColumnDef="start">
+        <mat-header-cell *matHeaderCellDef>Date de début</mat-header-cell>
+        <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
+            {{item.value.start | date:"EEEE d"}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="end">
+        <mat-header-cell *matHeaderCellDef>Date de fin</mat-header-cell>
+        <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
+            <ng-container *ngIf="!isDatesSameDay(item.value.start, item.value.end)">
+              {{item.value.end | date:"EEEE d"}}
+            </ng-container>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="soup">
+        <mat-header-cell *matHeaderCellDef>Soupe</mat-header-cell>
+        <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
+          <ng-container *ngIf="item.value.soup" formGroupName="soup">
+            <input formControlName="name" />
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dish">
+        <mat-header-cell *matHeaderCellDef>Plat</mat-header-cell>
+        <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
+          <ng-container formGroupName="dish">
+            <input formControlName="name" />
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dessert">
+        <mat-header-cell *matHeaderCellDef>Dessert</mat-header-cell>
+        <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
+          <ng-container *ngIf="item.value.dessert" formGroupName="dessert">
+            <input formControlName="name">
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          
+    </mat-table>
+    <button mat-stroked-button (click)="saveMenus()" [loading]="savingMenus">Sauver</button>
+  </form>

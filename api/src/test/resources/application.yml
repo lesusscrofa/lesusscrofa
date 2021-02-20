@@ -1,0 +1,14 @@
+app:
+ web:
+  corsAllowedOrigin: 'http://localhost:4200'
+
+spring:
+ jpa: 
+  show-sql: true
+  properties:
+   hibernate:
+    format_sql: true
+ datasource:
+  driver-class-name: 'org.testcontainers.jdbc.ContainerDatabaseDriver'
+  url: 'jdbc:tc:postgresql:13:///'
+  database-platform: 'org.hibernate.dialect.PostgreSQL9Dialect'

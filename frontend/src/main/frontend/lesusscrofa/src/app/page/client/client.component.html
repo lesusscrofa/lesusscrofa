@@ -1,0 +1,25 @@
+<button mat-fab color="primary" aria-label="Ajouter un livreur" (click)="create()">+</button>
+
+<client-search [client]="client" (clientSelected)="selectClient($event)"></client-search>
+
+<ng-container *ngIf="remark | async as remark">
+    <button (click)="editRemark(remark)" mat-icon-button>
+      <mat-icon *ngIf="remark.id">chat_bubble</mat-icon>
+      <mat-icon *ngIf="!remark.id">chat_bubble_outline</mat-icon>
+    </button>
+  </ng-container>
+
+<mat-tab-group *ngIf="client">
+    <mat-tab label="Commandes">
+        <order-form [client]="client"></order-form>
+    </mat-tab>
+    <mat-tab label="Fiche client">
+        <app-client-edition [client]="client" (clientEdited)=save($event)></app-client-edition>
+    </mat-tab>
+    <mat-tab label="Facturation">
+        <app-bill [client]="client"></app-bill>
+    </mat-tab>
+</mat-tab-group>
+
+
+

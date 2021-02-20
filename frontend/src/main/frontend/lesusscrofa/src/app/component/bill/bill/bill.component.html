@@ -1,0 +1,23 @@
+<mat-form-field appearance="fill">
+    <mat-label>Month and Year</mat-label>
+    <input matInput [matDatepicker]="monthPicker" [formControl]="month">
+    <mat-datepicker-toggle matSuffix [for]="monthPicker"></mat-datepicker-toggle>
+    <mat-datepicker #monthPicker
+                    startView="year"
+                    (monthSelected)="monthSelected($event, monthPicker)">
+    </mat-datepicker>
+  </mat-form-field>
+
+<ng-container *ngIf="bill$ | async as bill">
+    <div>
+        Prénom : {{ bill.client.firstName }}
+    </div>
+
+    <app-bill-order-list [billOrdersSummaries]="bill.ordersSummaries"></app-bill-order-list>
+
+    <div>
+        Total HT : {{ bill.totalVatExcluded }}
+        Total TVA : {{ bill.totalVat }}
+        Total TTC : {{ bill.totalVatIncluded }}
+    </div>
+</ng-container>

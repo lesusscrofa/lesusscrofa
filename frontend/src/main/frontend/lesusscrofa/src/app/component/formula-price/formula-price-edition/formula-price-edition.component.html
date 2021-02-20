@@ -1,0 +1,71 @@
+<form [formGroup]="priceEditionForm" novalidate (ngSubmit)="save()">
+    <mat-card>
+      <mat-card-title>
+        Prix de la formule
+      </mat-card-title>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Date de début</mat-label>
+              <input matInput placeholder="Date de début" type="date" formControlName="start" [matDatepicker]="startPicker">
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker></mat-datepicker>
+              <mat-error *ngIf="priceEditionForm.controls['start'].hasError('required')">
+                La date de début est <strong>obligatoire</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Type de service</mat-label>
+              <mat-select placeholder="Type de service" formControlName="formula">
+                  <mat-option *ngFor="let formula of formulas" [value]="formula">
+                      {{ formula | formulaToString }}
+                  </mat-option>
+              </mat-select>
+              <mat-error *ngIf="priceEditionForm.controls['formula'].hasError('required')">
+              Le type de commande est <strong>obligatoire</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Prix</mat-label>
+              <input matInput maxlength="5" placeholder="Prix" type="number" formControlName="price">
+              <mat-error *ngIf="priceEditionForm.controls['price'].hasError('required')">
+                Le prix est <strong>obligatoire</strong>
+              </mat-error>
+              <mat-error *ngIf="priceEditionForm.controls['price'].hasError('min')">
+                La ne peut être en dessous de <strong>0</strong> %
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>TVA</mat-label>
+              <mat-select placeholder="TVA" formControlName="vat">
+                <mat-option *ngFor="let vatValue of vatValues" [value]="vatValue">
+                    {{ vatValue }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="priceEditionForm.controls['vat'].hasError('required')">
+                La tva est <strong>obligatoire</strong>
+              </mat-error>
+              <mat-error *ngIf="priceEditionForm.controls['vat'].hasError('min') || priceEditionForm.controls['vat'].hasError('max')">
+                La tva doit est comprise entre <strong>0 et 100</strong> %
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button (click)="cancel()" type="reset">Annuler</button>
+        <button mat-raised-button color="primary" [disabled]="!priceEditionForm.valid" type="submit">{{ priceEditionForm.value['id'] != null ? 'Modifier' : 'Créer' }}</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>  

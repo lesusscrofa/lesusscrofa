@@ -1,0 +1,19 @@
+<form [formGroup]="parameters">
+    <mat-form-field appearance="fill">
+        <mat-label>Date de livraison</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="day">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-select placeholder="Livreur" formControlName="deliveryManId">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let deliveryMan of deliveryMans | async" [value]="deliveryMan.id">
+                {{ deliveryMan.firstName }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+
+<app-food-order-client-list *ngIf="foodsOrdersClients$ | async as foodsOrdersClients" [foodsOrdersClients]="foodsOrdersClients" (updateClientDeliveryPosition)="updateClientDeliveryPosition($event)"></app-food-order-client-list>
