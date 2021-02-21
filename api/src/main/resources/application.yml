@@ -13,7 +13,7 @@ spring:
    oauth2:
     resourceserver:
      jwt:
-      issuer-uri: https://dev-rlsy6dy0.eu.auth0.com/
+      issuer-uri: https://lesusscrofa.eu.auth0.com/
 
 auth0:
  audience: https://www.lesusscrofa.be/

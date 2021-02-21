@@ -55,6 +55,7 @@
       <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
         <app-order-food-field 
           [otherFoodsOrders]="item.value.others | async"
+          [day]="item.value.day"
           (otherFoodAdded)="otherFoodAdded(item.value.client, $event, item)"
           (otherFoodModified)="otherFoodModified($event, item)"
           (otherFoodRemoved)="otherFoodRemoved($event, item)">

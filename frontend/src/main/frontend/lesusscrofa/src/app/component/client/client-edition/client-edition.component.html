@@ -97,8 +97,6 @@
             <input matInput maxlength="3" placeholder="Reduction" type="number" formControlName="reduction">
           </mat-form-field>
         </div>
-      </div>
-      <div class="row">
         <div class="col">
           <mat-checkbox [checked]="!clientForm.value.deliveryPreferenceTakeAway" (change)="clientForm.value.deliveryPreferenceTakeAway = !clientForm.value.deliveryPreferenceTakeAway">
             Livraison à domicile ?

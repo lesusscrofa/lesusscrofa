@@ -40,13 +40,18 @@ export class FoodService {
       );
   }
 
-  getAllOtherFoodsContaining(partialName: string): Observable<Food[]> {
-    var url = this.url + '?service='+ServiceType.Other;
+  getAllOtherFoodsContaining(partialName: string, day: Date): Observable<Food[]> {
+    var url = this.url + '?start='+DateUtils.formatToIsoDate(day)
+      +'&end='+DateUtils.formatToIsoDate(day)
+      + '&service='+ServiceType.Other;
     
     return this.http.get<any>(url)
       .pipe(
         map(foods => foods.map((f: Object) => Food.fromJson(f))),
-        map(foods => foods.filter(food => partialName ? food.name.includes(partialName) : true))
+        map(foods => foods.filter(food => {
+          return partialName ? food.name.toLowerCase().includes(partialName.toLowerCase()) : true
+        })
+        )
       );
   }
 

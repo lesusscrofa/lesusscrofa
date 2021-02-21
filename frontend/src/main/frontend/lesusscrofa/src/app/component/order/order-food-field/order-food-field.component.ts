@@ -26,7 +26,18 @@ export class OrderFoodFieldComponent implements OnInit {
   foodControl: FormControl;
 
   @Input()
-  otherFoodsOrders: Order[];
+  day: Date;
+
+  @Input()
+  set otherFoodsOrders(otherFoodsOrders: Order[]) {
+    this._otherFoodsOrders= otherFoodsOrders;
+  }
+
+  get otherFoodsOrders(): Order[] {
+    return this._otherFoodsOrders;
+  }
+
+  _otherFoodsOrders: Order[];
 
   @Output()
   otherFoodAdded: EventEmitter<FoodWithQuantity>;
@@ -52,7 +63,8 @@ export class OrderFoodFieldComponent implements OnInit {
       startWith(null),
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap((foodName: string | null) => this.foodService.getAllOtherFoodsContaining(foodName)),
+      map(val => typeof val === 'string' ? val : ""),
+      switchMap((foodName: string | null) => this.foodService.getAllOtherFoodsContaining(foodName, this.day)),
       map(foods => Food.substractFoodsFromArray(foods, this.otherFoodsOrders.map(o => o.otherId))));
   }
 
@@ -96,5 +108,4 @@ export class OrderFoodFieldComponent implements OnInit {
   retrieveFood(foodId: number): Observable<Food> {
     return this.foodService.get(foodId);
   }
-
 }

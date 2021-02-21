@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface OrderWithPriceRepository extends CrudRepository<OrderWithPriceView, Long> {
 
-    @Query(value = "select new be.suscrofa.api.model.OrderSummary(op.id, op.name, op.formula, op.price, op.vat, cast(sum(op.quantity) as int), 0, op.unit) " +
+    @Query(value = "select new be.susscrofa.api.model.OrderSummary(op.id, op.name, op.formula, op.price, op.vat, cast(sum(op.quantity) as int), 0, op.unit) " +
             "from OrderWithPriceView op " +
             "where op.clientId = :clientId and op.day between :start and :end " +
             "group by op.id, op.name, op.formula, op.price, op.vat, op.unit")

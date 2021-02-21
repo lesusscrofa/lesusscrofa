@@ -1,3 +1,10 @@
 /.idea/
 /frontend/src/main/frontend/lesusscrofa/node_modules/
 /frontend/src/main/frontend/lesusscrofa/.vscode/
+/frontend/src/main/frontend/lesusscrofa/node/
+/frontend/target/
+/frontend/frontend.iml
+/master.iml
+/api/target/
+/api/.idea/
+/api/api.iml

@@ -7,7 +7,7 @@
       [removable]="true"
       (removed)="removeOrder(order)"
       (click)="modifyOrder(order)">
-      {{(order.other | async)?.name}} {{order.quantity}}
+      {{order.quantity}} {{(order.other | async)?.name}}
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
     <input

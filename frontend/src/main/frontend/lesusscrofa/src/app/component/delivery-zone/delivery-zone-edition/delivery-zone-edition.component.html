@@ -19,7 +19,7 @@
             <mat-form-field class="full-width">
                 <mat-select placeholder="Livreur" formControlName="deliveryManId">
                     <mat-option *ngFor="let deliveryMan of deliveryMans | async" [value]="deliveryMan.id">
-                        {{ deliveryMan.firstName }}
+                        {{ deliveryMan.firstName + ' ' + deliveryMan.lastName }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

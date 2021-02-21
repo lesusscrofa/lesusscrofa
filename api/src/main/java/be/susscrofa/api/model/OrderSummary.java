@@ -4,6 +4,7 @@ package be.susscrofa.api.model;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Data
 @Builder
@@ -27,28 +28,58 @@ public class OrderSummary {
 
     private String unit;
 
-    public BigDecimal getUnitPriceReductionIncluded() {
+    private BigDecimal computeUnitPriceReductionIncluded() {
         return unitPrice.multiply(BigDecimal.valueOf(100 - reduction).divide(BigDecimal.valueOf(100)));
     }
 
-    public BigDecimal getUnitPriceVatIncluded() {
-        return getUnitPriceReductionIncluded()
+    public BigDecimal getUnitPriceReductionIncluded() {
+        return computeUnitPriceReductionIncluded()
+                .setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal computeUnitPriceVat() {
+        return computeUnitPriceReductionIncluded()
+                .multiply(BigDecimal.valueOf(vat).divide(BigDecimal.valueOf(100)));
+    }
+
+    public BigDecimal computeUnitPriceVatIncluded() {
+        return computeUnitPriceReductionIncluded()
                 .multiply(BigDecimal.valueOf(1).add(BigDecimal.valueOf(vat).divide(BigDecimal.valueOf(100))));
     }
 
+    public BigDecimal getUnitPriceVatIncluded() {
+        return computeUnitPriceVatIncluded()
+                .setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private BigDecimal computeTotalVatExcluded() {
+        return computeUnitPriceReductionIncluded()
+                .multiply(BigDecimal.valueOf(quantity));
+    }
+
     public BigDecimal getTotalVatExcluded() {
-        return getUnitPriceReductionIncluded()
+        return computeTotalVatExcluded()
+                .setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private BigDecimal computeTotalVat() {
+        return computeUnitPriceVat()
                 .multiply(BigDecimal.valueOf(quantity));
     }
 
     public BigDecimal getTotalVat() {
-        return getTotalVatExcluded()
-                .multiply(BigDecimal.valueOf(vat).divide(BigDecimal.valueOf(100)));
+        return computeTotalVat()
+                .setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private BigDecimal computeTotalVatIncluded() {
+        return computeTotalVatExcluded()
+                .multiply(BigDecimal.valueOf(1).add(BigDecimal.valueOf(vat).divide(BigDecimal.valueOf(100))));
     }
 
     public BigDecimal getTotalVatIncluded() {
-        return getTotalVatExcluded()
-                .multiply(BigDecimal.valueOf(1).add(BigDecimal.valueOf(vat).divide(BigDecimal.valueOf(100))));
+        return computeTotalVatIncluded()
+                .setScale(2, RoundingMode.HALF_UP);
     }
 
     public String getDescription() {

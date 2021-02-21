@@ -140,7 +140,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   otherFoodAdded(client: Client, foodWithQuantity: FoodWithQuantity, menuFormGroup: FormGroup) {
-    const order = new Order(null, client.id, menuFormGroup.value['day'], menuFormGroup.value['delivery'],
+    const order = new Order(null, client.id, menuFormGroup.value['delivery'], menuFormGroup.value['day'],
                             null, null, null, null, null, null,
                             foodWithQuantity.foodId, this.foodService.get(foodWithQuantity.foodId),
                             Formula.OTHER, foodWithQuantity.quantity, 0, null);
