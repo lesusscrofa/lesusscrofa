@@ -1,10 +1,10 @@
-import { FoodOrderView } from "./food-order-view";
+import { OrderedFoodView } from "./ordered-food-view";
 
 export class DailyOrderRemarkView {
 
     public static fromJson(json: Object) {
         const foodsOrdersJson = json['foodsOrders'] as [];
-        const foodOrders = foodsOrdersJson.map(fj => FoodOrderView.fromJson(fj));
+        const foodOrders = foodsOrdersJson.map(fj => OrderedFoodView.fromJson(fj));
 
         return new DailyOrderRemarkView(json['clientId'],
                         json['clientFirstName'],
@@ -21,7 +21,7 @@ export class DailyOrderRemarkView {
                 private _day: Date,
                 private _clientMessage: string,
                 private _dailyMessage: string,
-                private _foodsOrders: FoodOrderView[]) {}
+                private _foodsOrders: OrderedFoodView[]) {}
     
     get clientId(): number {
         return this._clientId;
@@ -47,7 +47,7 @@ export class DailyOrderRemarkView {
         return this._dailyMessage;
     }
 
-    get foodsOrders(): FoodOrderView[] {
+    get foodsOrders(): OrderedFoodView[] {
         return this._foodsOrders;
     }
 

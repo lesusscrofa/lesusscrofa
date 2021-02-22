@@ -23,12 +23,12 @@ import { OrderFormComponent } from './component/order/order-form/order-form.comp
 import { ClientSearchComponent } from './component/client/client-search/client-search.component';
 import { ClientCreationComponent } from './component/client/client-creation/client-creation.component';
 import { MenuComponent } from './page/menu/menu.component';
-import { FoodOrderComponent } from './page/food-order/food-order.component';
-import { FoodOrderListComponent } from './component/order/food-order-list/food-order-list.component';
+import { OrderedFoodComponent } from './page/ordered-food/ordered-food.component';
+import { OrderedFoodListComponent } from './component/ordered-food/ordered-food-list/ordered-food-list.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MenuEditionComponent } from './component/menu/menu-edition/menu-edition.component';
-import { FoodOrderClientComponent } from './page/food-order-client/food-order-client.component';
-import { FoodOrderClientListComponent } from './component/order/food-order-client-list/food-order-client-list.component';
+import { DeliveryComponent } from './page/delivery/delivery.component';
+import { DeliveryListComponent } from './component/delivery/delivery-list/delivery-list.component';
 import { ClientEditionComponent } from './component/client/client-edition/client-edition.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -87,11 +87,11 @@ import { LoadingButtonDirective } from './component/common/loading-button.direct
     FoodListComponent,
     FoodsEditionComponent,
     MenuComponent,
-    FoodOrderComponent,
-    FoodOrderListComponent,
+    OrderedFoodComponent,
+    OrderedFoodListComponent,
     MenuEditionComponent,
-    FoodOrderClientComponent,
-    FoodOrderClientListComponent,
+    DeliveryComponent,
+    DeliveryListComponent,
     ClientEditionComponent,
     FormulaPriceListComponent,
     FormulaPriceEditionComponent,

@@ -39,9 +39,15 @@ public class RemarkResource {
         return remarkService.getRemark(clientId, day);
     }
 
+    @PutMapping("/api/clients/{clientId}/remarks")
+    public Remark update(@PathVariable Long clientId,
+                         @RequestBody Remark remark) {
+        return remarkService.save(clientId, null, remark.getMessage());
+    }
+
     @PutMapping("/api/clients/{clientId}/remarks/{day}")
     public Remark update(@PathVariable Long clientId,
-                         @PathVariable(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate day,
+                         @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate day,
                          @RequestBody Remark remark) {
         return remarkService.save(clientId, day, remark.getMessage());
     }

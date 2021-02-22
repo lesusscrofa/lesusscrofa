@@ -4,10 +4,10 @@
 
 <ng-container *ngIf="remark | async as remark">
     <button (click)="editRemark(remark)" mat-icon-button>
-      <mat-icon *ngIf="remark.id">chat_bubble</mat-icon>
-      <mat-icon *ngIf="!remark.id">chat_bubble_outline</mat-icon>
+        <mat-icon *ngIf="remark.id">chat_bubble</mat-icon>
+        <mat-icon *ngIf="!remark.id">chat_bubble_outline</mat-icon>
     </button>
-  </ng-container>
+</ng-container>
 
 <mat-tab-group *ngIf="client">
     <mat-tab label="Commandes">

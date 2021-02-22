@@ -54,7 +54,7 @@ export class RemarkService {
         );
     }
     else {
-      return this.http.put<Remark>(StringUtils.format(this.dayRemarkUrl, remark.clientId.toString()), remark.toJson())
+      return this.http.put<Remark>(StringUtils.format(this.clientRemarkUrl, remark.clientId.toString()), remark.toJson())
         .pipe(
           map(r => Remark.fromJson(r))
         );
@@ -69,7 +69,7 @@ export class RemarkService {
         );
     }
     else {
-      return this.http.delete<Remark>(StringUtils.format(this.dayRemarkUrl, remark.clientId.toString()))
+      return this.http.delete<Remark>(StringUtils.format(this.clientRemarkUrl, remark.clientId.toString()))
         .pipe(
           map(r => Remark.fromJson(r))
         );

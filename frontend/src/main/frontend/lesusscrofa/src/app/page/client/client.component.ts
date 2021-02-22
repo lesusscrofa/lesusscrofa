@@ -61,7 +61,7 @@ export class ClientComponent implements OnInit {
       this.remark = this.remarkService.delete(remark);
     }
     else if(remark.message !== '') {
-      this.remark = this.remarkService.save(Remark.fromJson(remark));
+      this.remark = this.remarkService.save(remark);
     }
   }
 

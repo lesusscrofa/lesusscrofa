@@ -39,5 +39,5 @@ public class DailyOrderRemarkView implements Serializable {
         @JoinColumn(name = "clientId", referencedColumnName = "clientId"),
         @JoinColumn(name = "orderDay", referencedColumnName = "day")
     })
-    private List<ClientWithFoodOrderView.FoodOrderGroupedByClient> foodsOrders;
+    private List<DeliveryView.FoodOrderedByClientView> foodsOrders;
 }

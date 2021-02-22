@@ -3,9 +3,10 @@ import { DateUtils } from "../utils/date-utils";
 export class Remark {
 
     public static fromJson(json: Object) {
+        var day = json['day'];
         return new Remark(json['id'],
                         json['clientId'],
-                        new Date(json['day']),
+                        day ? new Date(json['day']) : null,
                         json['message']);
     }
 
@@ -18,7 +19,7 @@ export class Remark {
         return {
             id: this._id,
             clientId: this.clientId,
-            day: DateUtils.formatToIsoDate(this._day),
+            day: this.day ? DateUtils.formatToIsoDate(this._day) : null,
             message: this._message
         }
     }

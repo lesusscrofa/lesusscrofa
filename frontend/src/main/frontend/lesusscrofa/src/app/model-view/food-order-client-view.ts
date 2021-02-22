@@ -1,4 +1,4 @@
-import { FoodOrderView } from "./food-order-view";
+import { OrderedFoodView } from "./ordered-food-view";
 
 export class FoodOrderClientView {
 
@@ -9,14 +9,14 @@ export class FoodOrderClientView {
 			json['id'],
 			json['firstName'],
 			json['lastName'],
-			foodsOrders.map(foodOrder => FoodOrderView.fromJson(foodOrder))
+			foodsOrders.map(foodOrder => OrderedFoodView.fromJson(foodOrder))
 		)
 	}
 
     constructor(private _id: number,
         private _firstName: string,
         private _lastName: string,
-        private _foodsOrders: FoodOrderView[]
+        private _foodsOrders: OrderedFoodView[]
         ) {}
 
     public get foodsDescription() {
@@ -47,11 +47,11 @@ export class FoodOrderClientView {
         this._lastName = lastName;
     }
 
-    public get foodsOrders(): FoodOrderView[] {
+    public get foodsOrders(): OrderedFoodView[] {
         return this._foodsOrders;
     }
 
-    public set foodsOrders(foodsOrders: FoodOrderView[]) {
+    public set foodsOrders(foodsOrders: OrderedFoodView[]) {
         this._foodsOrders = foodsOrders;
     }
 }
