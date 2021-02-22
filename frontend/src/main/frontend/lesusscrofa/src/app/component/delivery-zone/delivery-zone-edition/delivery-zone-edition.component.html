@@ -6,7 +6,7 @@
       <mat-card-content>
         <div class="row">
           <div class="col">
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" appearance="outline">
               <input matInput placeholder="Nom" type="text" formControlName="name">
               <mat-error *ngIf="deliveryZoneEditionForm.controls['name'].hasError('required')">
                 Le nom est <strong>obligatoire</strong>
@@ -16,7 +16,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" appearance="outline">
                 <mat-select placeholder="Livreur" formControlName="deliveryManId">
                     <mat-option *ngFor="let deliveryMan of deliveryMans | async" [value]="deliveryMan.id">
                         {{ deliveryMan.firstName + ' ' + deliveryMan.lastName }}

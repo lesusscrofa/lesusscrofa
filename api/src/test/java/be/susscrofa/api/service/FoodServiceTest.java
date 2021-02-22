@@ -71,7 +71,7 @@ public class FoodServiceTest {
 
         foodService.findAll(start, end, service);
 
-        verify(foodRepository).findAllByEndGreaterThanEqualAndStartLessThanEqualAndService(start, end, service);
+        verify(foodRepository).findAll(start, end, service);
     }
 
     @Test
@@ -146,7 +146,7 @@ public class FoodServiceTest {
                 .end(end)
                 .build();
 
-        when(foodRepository.findAllByEndGreaterThanEqualAndStartLessThanEqualAndService(start, end, service))
+        when(foodRepository.findAll(start, end, service))
                 .thenReturn(List.of(food));
 
         assertThatThrownBy(() -> foodService.create(food))
@@ -225,7 +225,7 @@ public class FoodServiceTest {
         when(foodRepository.existsById(food.getId()))
                 .thenReturn(true);
 
-        when(foodRepository.findAllByEndGreaterThanEqualAndStartLessThanEqualAndService(start, end, service))
+        when(foodRepository.findAll(start, end, service))
                 .thenReturn(List.of(food.toBuilder().id(2L).build()));
 
         assertThatThrownBy(() -> foodService.update(food))

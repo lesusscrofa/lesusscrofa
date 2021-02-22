@@ -43,15 +43,12 @@ export class FoodService {
   getAllOtherFoodsContaining(partialName: string, day: Date): Observable<Food[]> {
     var url = this.url + '?start='+DateUtils.formatToIsoDate(day)
       +'&end='+DateUtils.formatToIsoDate(day)
-      + '&service='+ServiceType.Other;
+      + '&service='+ServiceType.Other
+      + '&partialName='+partialName;
     
     return this.http.get<any>(url)
       .pipe(
-        map(foods => foods.map((f: Object) => Food.fromJson(f))),
-        map(foods => foods.filter(food => {
-          return partialName ? food.name.toLowerCase().includes(partialName.toLowerCase()) : true
-        })
-        )
+        map(foods => foods.map((f: Object) => Food.fromJson(f)))
       );
   }
 

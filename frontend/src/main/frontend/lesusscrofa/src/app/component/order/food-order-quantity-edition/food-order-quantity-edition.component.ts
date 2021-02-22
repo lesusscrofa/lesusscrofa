@@ -31,12 +31,14 @@ export class FoodOrderQuantityEditionComponent implements OnInit {
   }
 
   save(): void {
-    this.dialogRef.close(this.foodWithQuantity);
+    var food = this.foodWithQuantity;
+
+    food.quantity = this.orderQuantityEditionForm.value['quantity'];
+
+    this.dialogRef.close(food);
   }
 
   public get foodWithQuantity(): FoodWithQuantity {
-    this._foodWithQuantity.quantity = this.orderQuantityEditionForm.value['quantity'];
-
     return this._foodWithQuantity;
   }
 

@@ -171,7 +171,7 @@ public class FoodRepositoryTest extends AbstractRepositoryTest {
         foodRepository.save(otherFood4);
 
         var result = foodRepository
-                .findAllByEndGreaterThanEqualAndStartLessThanEqualAndService(
+                .findAll(
                         LocalDate.of(2020, 12, 4),
                         LocalDate.of(2020, 12, 5),
                         ServiceEnum.DISH);

@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" appearance="outline">
     <mat-label>Date de livraison</mat-label>
     <input matInput [matDatepicker]="picker" (dateChange)="dateChanged($event)" [formControl]="day">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

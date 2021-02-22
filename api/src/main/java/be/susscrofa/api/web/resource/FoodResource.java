@@ -24,8 +24,12 @@ public class FoodResource {
     public List<Food> findFoods(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end,
-            @RequestParam ServiceEnum service) {
-        if(start != null && end != null) {
+            @RequestParam ServiceEnum service,
+            @RequestParam(required = false) String partialName) {
+        if(start != null && end != null && partialName != null) {
+            return foodService.findAll(start, end, service, partialName);
+        }
+        else if(start != null && end != null) {
             return foodService.findAll(start, end, service);
         }
         else if(start == null && end == null) {

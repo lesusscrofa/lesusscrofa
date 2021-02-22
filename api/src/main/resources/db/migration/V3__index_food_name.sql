@@ -1,0 +1,1 @@
+CREATE INDEX food_name_idx ON food(name);

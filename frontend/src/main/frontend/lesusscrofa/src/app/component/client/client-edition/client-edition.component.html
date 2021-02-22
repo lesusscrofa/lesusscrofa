@@ -3,7 +3,7 @@
     <mat-card-content>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="First name" formControlName="firstName">
             <mat-error *ngIf="clientForm.controls['firstName'].hasError('required')">
               Le prénom est <strong>obligatoire</strong>
@@ -11,7 +11,7 @@
           </mat-form-field>
         </div>
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="Last name" formControlName="lastName">
             <mat-error *ngIf="clientForm.controls['lastName'].hasError('required')">
               Le nom est <strong>obligatoire</strong>
@@ -21,26 +21,26 @@
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field class="full-width" appearance="outline">
             <textarea matInput placeholder="Address" formControlName="deliveryStreet"></textarea>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field class="full-width" appearance="outline">
             <input matInput #deliveryZipCode maxlength="4" placeholder="Postal Code" type="number" formControlName="deliveryZipCode">
             <mat-hint align="end">{{deliveryZipCode.value.length}} / 4</mat-hint>
           </mat-form-field>
         </div>
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="City" formControlName="deliveryCity">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
-        <mat-form-field class="full-width">
+        <mat-form-field class="full-width" appearance="outline">
           <mat-select placeholder="Zone de livraison" formControlName="deliveryZoneId">
               <mat-option *ngFor="let deliveryZone of deliveryZones | async" [value]="deliveryZone.id">
                   {{ deliveryZone.name }}
@@ -50,7 +50,7 @@
       </div>
       <div class="row">
         <div class="row">
-          <mat-form-field class="full-width">
+          <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="Téléphone" formControlName="deliveryPhone">
           </mat-form-field>
         </div>
@@ -64,7 +64,7 @@
       </div>
       <div class="row" *ngIf="!sameAddressForBilling">
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field class="full-width" appearance="outline">
             <textarea matInput placeholder="Address" formControlName="billingStreet"></textarea>
           </mat-form-field>
         </div>
@@ -72,20 +72,20 @@
       <div *ngIf="!sameAddressForBilling">
         <div class="row">
           <div class="col">
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" appearance="outline">
               <input matInput #billingZipCode maxlength="4" placeholder="Postal Code" type="number" formControlName="billingZipCode">
               <mat-hint align="end">{{billingZipCode.value.length}} / 4</mat-hint>
             </mat-form-field>
           </div>
           <div class="col">
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" appearance="outline">
               <input matInput placeholder="City" formControlName="billingCity">
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="row">
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" appearance="outline">
               <input matInput placeholder="Téléphone" formControlName="billingPhone">
             </mat-form-field>
           </div>
@@ -93,7 +93,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field class="full-width" appearance="outline">
             <input matInput maxlength="3" placeholder="Reduction" type="number" formControlName="reduction">
           </mat-form-field>
         </div>

@@ -36,7 +36,11 @@ public class FoodService {
     }
 
     public List<Food> findAll(@NotNull LocalDate start, @NotNull LocalDate end, @NotNull ServiceEnum service) {
-            return foodRepository.findAllByEndGreaterThanEqualAndStartLessThanEqualAndService(start, end, service);
+        return foodRepository.findAll(start, end, service);
+    }
+
+    public List<Food> findAll(@NotNull LocalDate start, @NotNull LocalDate end, @NotNull ServiceEnum service, String partialName) {
+        return foodRepository.findAll(start, end, service, partialName);
     }
 
     public List<Food> findAll(@NotNull ServiceEnum service) {
@@ -78,7 +82,7 @@ public class FoodService {
         }
         else if(food.isAlternativeDish()) {
             return foodRepository
-                    .findAllByEndGreaterThanEqualAndStartLessThanEqualAndService(
+                    .findAll(
                             food.getStart(),
                             food.getEnd(),
                             ServiceEnum.ALTERNATIVE_DISH)
