@@ -73,7 +73,7 @@ public class DeliveryResourceTest extends AbstractResourceTest {
         order3WithDay2Dish2Client1.setClientId(client1.getId());
         orderRepository.save(data.order3WithDay2Dish2Client1);
 
-        this.mockMvc.perform(get("/api/delivery/{day}", data.day1))
+        this.mockMvc.perform(get("/api/deliveries/{day}", data.day1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
