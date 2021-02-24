@@ -69,6 +69,7 @@ import { MonthPickerComponent } from './component/common/month-picker/month-pick
 import { RemarkListComponent } from './component/remark/remark-list/remark-list.component';
 import { FormulaToStringPipe } from './pipe/formula-to-string.pipe';
 import { LoadingButtonDirective } from './component/common/loading-button.directive';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -148,6 +149,7 @@ import { LoadingButtonDirective } from './component/common/loading-button.direct
     AppRoutingModule,
     BrowserAnimationsModule,
     DragDropModule,
+    FlexLayoutModule,
     FormsModule,
     HttpClientModule,
     MatAutocompleteModule,

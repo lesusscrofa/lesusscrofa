@@ -1,13 +1,15 @@
-<button mat-fab color="primary" aria-label="Ajouter un livreur" (click)="create()">+</button>
-
-<client-search [client]="client" (clientSelected)="selectClient($event)"></client-search>
-
-<ng-container *ngIf="remark | async as remark">
-    <button (click)="editRemark(remark)" mat-icon-button>
-        <mat-icon *ngIf="remark.id">chat_bubble</mat-icon>
-        <mat-icon *ngIf="!remark.id">chat_bubble_outline</mat-icon>
-    </button>
-</ng-container>
+<div class="right-margin left-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <client-search [client]="client" (clientSelected)="selectClient($event)"></client-search>
+    <ng-container *ngIf="remark | async as remark">
+        <button (click)="editRemark(remark)" mat-icon-button>
+            <mat-icon *ngIf="remark.id">chat_bubble</mat-icon>
+            <mat-icon *ngIf="!remark.id">chat_bubble_outline</mat-icon>
+        </button>
+    </ng-container>
+    <div fxLayoutAlign="end center" fxFlex="1 1 auto">
+        <button mat-fab color="primary" aria-label="Ajouter un livreur" (click)="create()">+</button>
+    </div>
+</div>
 
 <mat-tab-group *ngIf="client">
     <mat-tab label="Commandes">

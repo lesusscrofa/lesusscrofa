@@ -25,8 +25,10 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Le Sus Scrofa</span>
-      <app-auth-button></app-auth-button>
+      <div fxLayout="row" fxFlex="100%">
+        <span fxFlex="30%">Le Sus Scrofa</span>
+        <app-auth-button fxFlex="70%" fxLayoutAlign="end center"></app-auth-button>
+      </div>
     </mat-toolbar>
 
     <router-outlet></router-outlet>

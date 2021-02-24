@@ -1,10 +1,12 @@
-<app-month-picker (monthSelected)="monthSelected($event)"></app-month-picker>
+<div class="right-margin left-margin" fxLayoutAlign="start center">
+  <app-month-picker (monthSelected)="monthSelected($event)"></app-month-picker>
+</div>
 
 <form [formGroup]="menusForm">
   <mat-table [dataSource]="dataSource" formArrayName="items">
     <ng-container matColumnDef="day">
-      <mat-header-cell *matHeaderCellDef>Jour</mat-header-cell>
-      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
+      <mat-header-cell *matHeaderCellDef fxFlex="0 1 150px">Jour</mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="0 1 150px">
           {{item.value.day | date:"EEEE d"}}
           <ng-container *ngIf="item.value.remark | async as remark">
             <button (click)="editRemark(remark)" mat-icon-button>
@@ -19,7 +21,7 @@
       <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
         <ng-container *ngIf="item.value.soup as soup">
           {{soup.name}}
-          <input type="number" formControlName="soupQuantity" />
+          <input type="number" formControlName="soupQuantity" fxFlex="40px" />
         </ng-container>
       </mat-cell>
     </ng-container>
@@ -28,7 +30,7 @@
       <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i"> 
         <ng-container *ngIf="item.value.dish as dish">
           {{dish.name}}
-          <input type="number" formControlName="dishQuantity" />
+          <input type="number" formControlName="dishQuantity" fxFlex="40px" />
         </ng-container>
       </mat-cell>
     </ng-container>
@@ -37,7 +39,7 @@
       <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
         <ng-container *ngIf="item.value.alternativeDish as alternativeDish">
           {{alternativeDish.name}}
-          <input type="number" formControlName="alternativeDishQuantity" />
+          <input type="number" formControlName="alternativeDishQuantity" fxFlex="40px" />
         </ng-container>
       </mat-cell>
     </ng-container>
@@ -46,7 +48,7 @@
       <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
         <ng-container *ngIf="item.value.dessert as dessert">
           {{dessert.name}}
-          <input type="number" formControlName="dessertQuantity" />
+          <input type="number" formControlName="dessertQuantity" fxFlex="40px" />
         </ng-container>
       </mat-cell>
     </ng-container>
@@ -63,8 +65,8 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="delivery">
-      <mat-header-cell *matHeaderCellDef>Livraison</mat-header-cell>
-      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i">
+      <mat-header-cell *matHeaderCellDef fxFlex="0 1 50px">Livr.</mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="0 1 50px">
         <mat-checkbox [checked]="item.value.delivery"></mat-checkbox>
       </mat-cell>
     </ng-container>

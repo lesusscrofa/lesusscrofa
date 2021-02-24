@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { ClientCreationComponent } from 'src/app/component/client/client-creation/client-creation.component';
 import { EncodeRemarkComponent } from 'src/app/component/remark/encode-remark/encode-remark.component';
 import { Client } from 'src/app/model/client';
@@ -74,6 +74,9 @@ export class ClientComponent implements OnInit {
 
     if(client) {
       this.remark = this.remarkService.getClientRemark(this.client.id);
+    }
+    else {
+      this.remark = EMPTY;
     }
   }
 }
