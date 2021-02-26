@@ -5,8 +5,8 @@
 <form [formGroup]="menusForm">
   <mat-table [dataSource]="dataSource" formArrayName="items">
     <ng-container matColumnDef="day">
-      <mat-header-cell *matHeaderCellDef fxFlex="0 1 200px">Jour</mat-header-cell>
-      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="0 1 200px">
+      <mat-header-cell *matHeaderCellDef fxFlex="0 0 150px">Jour</mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="0 0 150px">
           {{item.value.day | date:"EEEE d"}}
           <ng-container *ngIf="item.value.remark | async as remark">
             <button (click)="editRemark(remark)" mat-icon-button>
@@ -17,8 +17,8 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="soup">
-      <mat-header-cell *matHeaderCellDef fxFlex="1 1 150px">Soupe</mat-header-cell>
-      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 1 150px">
+      <mat-header-cell *matHeaderCellDef fxFlex="1 0 150px">Soupe</mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 0 150px">
         <mat-form-field *ngIf="item.value.soup as soup" class="full-width" appearance="outline" fxFlexFill>
           <mat-label class="label">{{soup.name}}</mat-label>
           <input matInput [placeholder]="soup.name" type="number" formControlName="soupQuantity" />
@@ -26,8 +26,8 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="dish">
-      <mat-header-cell *matHeaderCellDef fxFlex="1 1 150px">Plat</mat-header-cell>
-      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 1 150px"> 
+      <mat-header-cell *matHeaderCellDef fxFlex="1 0 150px">Plat</mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 0 150px"> 
         <mat-form-field *ngIf="item.value.dish as dish" class="full-width" appearance="outline" fxFlexFill>
           <mat-label>{{dish.name}}</mat-label>
           <input matInput [placeholder]="dish.name" type="number" formControlName="dishQuantity" />
@@ -35,8 +35,8 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="alternativeDish">
-      <mat-header-cell *matHeaderCellDef fxFlex="1 1 150px">Plat alternatif</mat-header-cell>
-      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 1 150px">
+      <mat-header-cell *matHeaderCellDef fxFlex="1 0 150px">Plat alternatif</mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 0 150px">
         <mat-form-field *ngIf="item.value.alternativeDish as alternativeDish" class="full-width" appearance="outline" fxFlexFill>
           <mat-label>{{alternativeDish.name}}</mat-label>
           <input matInput [placeholder]="alternativeDish.name" type="number" formControlName="alternativeDishQuantity" />
@@ -44,8 +44,8 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="dessert">
-      <mat-header-cell *matHeaderCellDef fxFlex="1 1 150px">Dessert</mat-header-cell>
-      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 1 150px">
+      <mat-header-cell *matHeaderCellDef fxFlex="1 0 150px">Dessert</mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 0 150px">
         <mat-form-field *ngIf="item.value.dessert as dessert" class="full-width" appearance="outline" fxFlexFill>
           <mat-label>{{dessert.name}}</mat-label>
           <input matInput [placeholder]="dessert.name" type="number" formControlName="dessertQuantity" />
@@ -53,8 +53,8 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="others">
-      <mat-header-cell *matHeaderCellDef fxFlex="1 1 150px">Autres</mat-header-cell>
-      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 1 150px">
+      <mat-header-cell *matHeaderCellDef fxFlex="1 0 150px">Autres</mat-header-cell>
+      <mat-cell *matCellDef="let item; let i = index" [formGroupName]="i" fxFlex="1 0 150px">
         <app-order-food-field fxFlexFill
           [otherFoodsOrders]="item.value.others | async"
           [day]="item.value.day"
