@@ -83,13 +83,13 @@ export class OrderFormComponent implements OnInit {
       client: [menuOrder.client],
       delivery: [menuOrder.delivery],
       soup: [menuOrder.soup],
-      soupQuantity: [menuOrder.soupQuantity],
+      soupQuantity: [menuOrder.soupQuantity != 0 ? menuOrder.soupQuantity : null],
       dish: [menuOrder.dish],
-      dishQuantity: [menuOrder.dishQuantity],
+      dishQuantity: [menuOrder.dishQuantity != 0 ? menuOrder.dishQuantity : null],
       alternativeDish: [menuOrder.alternativeDish],
-      alternativeDishQuantity: [menuOrder.alternativeDishQuantity],
+      alternativeDishQuantity: [menuOrder.alternativeDishQuantity != 0 ? menuOrder.alternativeDishQuantity : null],
       dessert: [menuOrder.dessert],
-      dessertQuantity: [menuOrder.dessertQuantity],
+      dessertQuantity: [menuOrder.dessertQuantity != 0 ? menuOrder.dessertQuantity : null],
       others: [this.orderService.getOrdersByFormula(menuOrder.client.id, menuOrder.day, Formula.OTHER)],
       orders: [menuOrder.orders],
       remark: [this.remarkService.getDailyRemark(menuOrder.client.id, menuOrder.day)]
@@ -121,19 +121,24 @@ export class OrderFormComponent implements OnInit {
   }
 
   private toMenuOrder(menuFormGroup: FormGroup): MenuOrder {
+    var soupQuantity = menuFormGroup['soupQuantity'];
+    var dishQuantity = menuFormGroup['dishQuantity'];
+    var alternativeDishQuantity = menuFormGroup['alternativeDishQuantity'];
+    var dessertQuantity = menuFormGroup['dessertQuantity'];
+
     return new MenuOrder(
       menuFormGroup['day'],
       menuFormGroup['delivery'],
       menuFormGroup['menu'],
       menuFormGroup['client'],
       menuFormGroup['soup'],
-      menuFormGroup['soupQuantity'],
+      soupQuantity ? soupQuantity : 0,
       menuFormGroup['dish'],
-      menuFormGroup['dishQuantity'],
+      dishQuantity ? dishQuantity : 0,
       menuFormGroup['alternativeDish'],
-      menuFormGroup['alternativeDishQuantity'],
+      alternativeDishQuantity ? alternativeDishQuantity : 0,
       menuFormGroup['dessert'],
-      menuFormGroup['dessertQuantity'],
+      dessertQuantity ? dessertQuantity : 0,
       menuFormGroup['orders'],
       this.foodService
     );
