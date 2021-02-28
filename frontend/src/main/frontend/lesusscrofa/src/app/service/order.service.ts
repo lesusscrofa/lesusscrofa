@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, forkJoin, Observable, of, pipe, throwError } from 'rxjs';
-import { catchError, defaultIfEmpty, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, defaultIfEmpty, filter, map, mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Client } from '../model/client';
 import { Formula } from '../model/formula';
@@ -28,7 +28,10 @@ export class OrderService {
     }
 
   saveOrders(orders: Order[]): Observable<Order[]> {
-    return forkJoin(orders.map(order => this.saveOrder(order)));
+    return forkJoin(orders.map(order => this.saveOrder(order)))
+      .pipe(
+        map(orders => orders.filter(o => o))
+      );
   }
 
   saveOrder(order: Order): Observable<Order> {
@@ -38,7 +41,8 @@ export class OrderService {
       }
       else {
         this.deleteOrder(order).subscribe();
-        return of(order);
+
+        return of(null);
       }
     }
     else {
@@ -59,6 +63,7 @@ export class OrderService {
     else {
       return this.saveOrders(orders)
       .pipe(
+        tap(console.log),
         map(orders => MenuOrder.fromOrders(menuOrder.client, menuOrder.menu, orders, this.foodService))
       );
     }

@@ -84,11 +84,9 @@ public class OrderService {
 
 		if(Formula.OTHER == order.getFormula()) {
 			var food = foodService.getById(order.getOtherId());
-			//order.setPrice(food.getPrice());
 		}
 		else{
 			var formula = formulaPriceService.getActive(order.getFormula());
-			//order.setPrice(formula.getPrice());
 		}
 
 		return orderRepository.save(order);
