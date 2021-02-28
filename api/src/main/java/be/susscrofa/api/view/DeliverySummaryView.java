@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +73,7 @@ public class DeliverySummaryView {
         return foodsOrdersClient
                 .stream()
                 .flatMap(DeliverySummaryView::toDeliveries)
+                .sorted(Comparator.comparingInt(DeliverySummaryView::getDeliveryPosition))
                 .collect(Collectors.toList());
     }
 

@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {MatTable} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import { DeliveryView } from 'src/app/model-view/delivery-view';
-import {CdkDragDrop} from "@angular/cdk/drag-drop";
-import {DeliveryListDatasource} from "./delivery-list-datasource";
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import { ClientService } from 'src/app/service/client.service';
 
 @Component({
   selector: 'app-delivery-list',
@@ -16,17 +16,18 @@ export class DeliveryListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<DeliveryView>;
 
-  private _deliveries: DeliveryView[];
+  @Input()
+  isLoading: boolean;
 
   displayedColumns: string[] = ['deliveryPosition', 'firstName', 'lastName', "soupQuantity", "dishQuantity", "alternativeDishQuantity", "dessertQuantity", "others"];
 
-  dataSource: DeliveryListDatasource;
+  dataSource: MatTableDataSource<DeliveryView>;
 
   @Output()
   private updateClientDeliveryPosition: EventEmitter<{clientIdToUpdate: number, newDeliveryPosition : number}>;
 
-  constructor() { 
-    this.dataSource = new DeliveryListDatasource();
+  constructor(private clientService: ClientService) { 
+    this.dataSource = new MatTableDataSource();
     this.updateClientDeliveryPosition = new EventEmitter<{clientIdToUpdate: number; newDeliveryPosition: number}>();
   }
 
@@ -35,26 +36,23 @@ export class DeliveryListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
-  }
-
-  get foodsOrders(): DeliveryView[] {
-    return this._deliveries;
+    
   }
 
   onListDrop(event: CdkDragDrop<DeliveryView[]>) {
-    const clientIdToUpdate = this._deliveries[event.previousIndex].id;
-    const newDeliveryPosition = event.currentIndex+1;
+    const clientIdToUpdate = this.dataSource.data[event.previousIndex].id;
+    const newDeliveryPosition = this.dataSource.data[event.currentIndex].deliveryPosition;
+
+    moveItemInArray(this.dataSource.data, event.previousIndex, event.currentIndex);
+    this.table.renderRows();
 
     this.updateClientDeliveryPosition.emit({clientIdToUpdate, newDeliveryPosition});
   }
 
   @Input()
   set deliveries(deliveries: DeliveryView[]) {
-    this._deliveries = deliveries;
-    this.dataSource.loadData(deliveries);
+    this.dataSource.data = deliveries;
   }
 
+  
 }

@@ -29,6 +29,16 @@ export class DeliveryView {
         );
     }
 
+    public static updateDeliveryPosition(deliveries: DeliveryView[], updatedDeliveries: DeliveryView[]) {
+        for(let delivery of deliveries) {
+            const updatedDelivery = updatedDeliveries.find(nd => nd.id = delivery.id);
+
+            if(updatedDeliveries) {
+                delivery.deliveryPosition = updatedDelivery.deliveryPosition;
+            }
+        }
+    }
+
     constructor(private _id: number,
         private _firstName: string,
         private _lastName: string,

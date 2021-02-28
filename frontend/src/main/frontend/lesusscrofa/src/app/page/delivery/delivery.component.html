@@ -16,4 +16,7 @@
     </mat-form-field>
 </form>
 
-<app-delivery-list *ngIf="deliveries$ | async as deliveries" [deliveries]="deliveries" (updateClientDeliveryPosition)="updateClientDeliveryPosition($event)"></app-delivery-list>
+<app-delivery-list 
+    [deliveries]="deliveries$ | async" 
+    [isLoading]="isDeliveriesLoading"
+    (updateClientDeliveryPosition)="updateClientDeliveryPosition($event)"></app-delivery-list>

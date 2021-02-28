@@ -6,5 +6,8 @@ spring:
     format_sql: false
   datasource:
     url: jdbc:postgresql://localhost:5432/suscrofa
+    #url: jdbc:postgresql://ec2-54-155-226-153.eu-west-1.compute.amazonaws.com:5432/ddl6ljhijkckeu
     username: suscrofa_adm
     password: password
+    #username: rulfecnpyenenu
+    #password: 5c614474d50d6b92d249bf4eda06cf00bcdfa212e9043e575816eef1ccc470b3

@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DeliveryView } from 'src/app/model-view/delivery-view';
-import { OrderedFoodService } from 'src/app/service/ordered-food.service';
 import {ClientService} from "../../service/client.service";
-import {map, mergeMap} from "rxjs/operators";
+import {map, mergeMap, tap} from "rxjs/operators";
 import { DeliveryMan } from 'src/app/model/delivery-man';
 import { DeliveryManService } from 'src/app/service/delivery-man.service';
 import { DeliveryService } from 'src/app/service/delivery.service';
@@ -19,6 +18,8 @@ export class DeliveryComponent implements OnInit {
   parameters: FormGroup;
 
   deliveries$: Observable<DeliveryView[]>;
+
+  isDeliveriesLoading = true;
 
   deliveryMans: Observable<DeliveryMan[]>;
 
@@ -45,17 +46,23 @@ export class DeliveryComponent implements OnInit {
   }
 
   private loadFoodsOrders(day: Date, deliveryManId: number) {
-    this.deliveries$ = this.deliveryService.getDelivery(day, deliveryManId);
+    this.deliveries$ = this.deliveryService.getDelivery(day, deliveryManId)
+      .pipe(
+        tap(d => this.isDeliveriesLoading = false)
+      );
   }
 
   updateClientDeliveryPosition(params: {clientIdToUpdate: number, newDeliveryPosition : number}): void {
+    this.isDeliveriesLoading = true;
+
     this.deliveries$ = this.clientService.get(params.clientIdToUpdate).pipe(
         map(client => {
           client.deliveryPosition = params.newDeliveryPosition
           return client;
         }),
         mergeMap(client => this.clientService.update(client)),
-        mergeMap(client => this.deliveryService.getDelivery(this.day.value, this.deliveryManId.value))
+        mergeMap(client => this.deliveryService.getDelivery(this.day.value, this.deliveryManId.value)),
+        tap(d => this.isDeliveriesLoading = false)
     );
   }
 
