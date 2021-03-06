@@ -20,6 +20,7 @@
 		<java.version>15</java.version>
     	<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
 		<testcontainers.version>1.15.1</testcontainers.version>
+		<flying-saucer-openpdf.version>9.1.20</flying-saucer-openpdf.version>
 	</properties>
 
 	<dependencies>
@@ -79,10 +80,15 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- PDF generation dependencies -->
 		<dependency>
-			<groupId>org.javatuples</groupId>
-			<artifactId>javatuples</artifactId>
-			<version>1.2</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>flying-saucer-pdf-openpdf</artifactId>
+			<version>${flying-saucer-openpdf.version}</version>
 		</dependency>
 		
 		<dependency>

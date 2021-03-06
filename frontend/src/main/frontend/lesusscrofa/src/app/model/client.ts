@@ -10,10 +10,12 @@ export class Client {
 			json['deliveryCity'],
 			json['deliveryZoneId'],
 			json['deliveryPhone'],
+			json['deliveryEmail'],
 			json['billingStreet'],
 			json['billingZipCode'],
 			json['billingCity'],
 			json['billingPhone'],
+			json['billingEmail'],
 			json['reduction'],
 			json['deliveryPosition'],
 			json['deliveryPreferenceTakeAway']
@@ -30,10 +32,12 @@ export class Client {
 		private _deliveryCity: string,
 		private _deliveryZoneId: number,
 		private _deliveryPhone: string,
+		private _deliveryEmail: string,
 		private _billingStreet: string,
 		private _billingZipCode: number,
 		private _billingCity: string,
 		private _billingPhone: string,
+		private _billingEmail: string,
 		private _reduction: number,
 		private _deliveryPosition: number,
 		private _deliveryPreferenceTakeAway: boolean
@@ -103,6 +107,14 @@ export class Client {
 		this._deliveryPhone = deliveryPhone;
 	}
 
+	public get deliveryEmail(): string {
+		return this._deliveryEmail;
+	}
+
+	public set deliveryEmail(deliveryEmail: string) {
+		this._deliveryEmail = deliveryEmail;
+	}
+
 	public get billingStreet(): string {
 		return this._billingStreet;
 	}
@@ -133,6 +145,14 @@ export class Client {
 
 	public set billingPhone(billingPhone: string) {
 		this._billingPhone = billingPhone;
+	}
+
+	public get billingEmail(): string {
+		return this._billingEmail;
+	}
+
+	public set billingEmail(billingEmail: string) {
+		this._billingEmail = billingEmail;
 	}
 
 	public get reduction() {
@@ -169,10 +189,12 @@ export class Client {
 			deliveryCity: this.deliveryCity,
 			deliveryZoneId: this.deliveryZoneId,
 			deliveryPhone: this.deliveryPhone,
+			deliveryEmail: this.deliveryEmail,
 			billingStreet: this.billingStreet,
 			billingZipCode: this.billingZipCode,
 			billingCity: this.billingCity,
 			billingPhone: this.billingPhone,
+			billingEmail: this.billingEmail,
 			reduction: this.reduction,
 			deliveryPosition: this.deliveryPosition,
 			deliveryPreferenceTakeAway: this.deliveryPreferenceTakeAway

@@ -38,11 +38,13 @@ public class Client {
 	private Integer deliveryZipCode;
 	private String deliveryCity;
 	private String deliveryPhone;
+	private String deliveryEmail;
 
 	private String billingStreet;
 	private Integer billingZipCode;
 	private String billingCity;
 	private String billingPhone;
+	private String billingEmail;
 
 	private Integer reduction;
 

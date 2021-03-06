@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { Observable } from 'rxjs';
-import { Bill } from 'src/app/model/bill';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Client } from 'src/app/model/client';
 import { BillService } from 'src/app/service/bill.service';
+import { StringUtils } from 'src/app/utils/string-utils';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-bill',
@@ -15,11 +16,12 @@ export class BillComponent implements OnInit {
 
   month: FormControl;
 
+  billUrl: SafeResourceUrl;
+
   private _client: Client;
 
-  private _bill$: Observable<Bill>;
-
-  constructor(private billService: BillService) {
+  constructor(private billService: BillService,
+              private sanitizer: DomSanitizer) {
     this.month = new FormControl(new Date());
    }
 
@@ -42,16 +44,14 @@ export class BillComponent implements OnInit {
 
   private loadBill() {
     const monthDate = this.month.value as Date;
+    const month = monthDate.getMonth() + 1;
+    const year = monthDate.getFullYear();
 
-    this.bill$ = this.billService.get(this.client.id, monthDate.getMonth() + 1, monthDate.getFullYear());
-  }
+    this.billService.get(this.client.id, month, year).subscribe(pdf => {
+      this.billUrl = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(pdf));
+    });
 
-  set bill$(bill$: Observable<Bill>) {
-    this._bill$ = bill$;
-  }
-
-  get bill$(): Observable<Bill> {
-    return this._bill$;
+    console.log(this.billUrl);
   }
 
   @Input() 

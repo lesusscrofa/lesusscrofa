@@ -49,10 +49,18 @@
         </mat-form-field>
       </div>
       <div class="row">
-        <div class="row">
+        <div class="col">
           <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="Téléphone" formControlName="deliveryPhone">
           </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width" appearance="outline">
+            <input matInput placeholder="Email" formControlName="deliveryEmail">
+          </mat-form-field>
+          <mat-error *ngIf="clientForm.controls['deliveryEmail'].hasError('email')">
+            Le format de l'addresse email n'est pas correct
+          </mat-error>
         </div>
       </div>
       <div class="row">
@@ -84,10 +92,18 @@
           </div>
         </div>
         <div class="row">
-          <div class="row">
+          <div class="col">
             <mat-form-field class="full-width" appearance="outline">
               <input matInput placeholder="Téléphone" formControlName="billingPhone">
             </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <input matInput placeholder="Email" formControlName="billingEmail">
+            </mat-form-field>
+            <mat-error *ngIf="clientForm.controls['billingEmail'].hasError('email')">
+              Le format de l'addresse email n'est pas correct
+            </mat-error>
           </div>
         </div>
       </div>

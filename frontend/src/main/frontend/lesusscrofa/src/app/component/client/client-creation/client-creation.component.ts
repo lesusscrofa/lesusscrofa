@@ -57,10 +57,12 @@ export class ClientCreationComponent implements OnInit {
       deliveryCity: client.deliveryCity,
       deliveryZoneId: client.deliveryZoneId,
       deliveryPhone: client.deliveryPhone,
+      deliveryEmail: client.deliveryEmail,
       billingStreet: client.billingStreet,
       billingZipCode: client.billingZipCode,
       billingCity: client.billingCity,
       billingPhone: client.billingPhone,
+      billingEmail: client.billingEmail,
       reduction: client.reduction,
       deliveryPosition: client.deliveryPosition
     });
@@ -76,10 +78,12 @@ export class ClientCreationComponent implements OnInit {
       this.clientForm.value['deliveryCity'],
       this.clientForm.value['deliveryZoneId'],
       this.clientForm.value['deliveryPhone'],
+      this.clientForm.value['deliveryEmail'],
       this.clientForm.value['billingStreet'],
       this.clientForm.value['billingZipCode'],
       this.clientForm.value['billingCity'],
       this.clientForm.value['billingPhone'],
+      this.clientForm.value['billingEmail'],
       this.clientForm.value['reduction'],
       this.clientForm.value['deliveryPosition'],
       this.clientForm.value['deliveryPreferenceTakeAway']

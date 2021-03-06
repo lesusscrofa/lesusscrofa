@@ -7,6 +7,8 @@ import {map, mergeMap, tap} from "rxjs/operators";
 import { DeliveryMan } from 'src/app/model/delivery-man';
 import { DeliveryManService } from 'src/app/service/delivery-man.service';
 import { DeliveryService } from 'src/app/service/delivery.service';
+import { MenuService } from 'src/app/service/menu.service';
+import { Menu } from 'src/app/model/menu';
 
 @Component({
   selector: 'app-delivery',
@@ -23,10 +25,13 @@ export class DeliveryComponent implements OnInit {
 
   deliveryMans: Observable<DeliveryMan[]>;
 
+  menu$: Observable<Menu>;
+
   constructor(private fb: FormBuilder,
       private deliveryService: DeliveryService,
       private clientService: ClientService,
-      private deliveryManService: DeliveryManService) {
+      private deliveryManService: DeliveryManService,
+      private menuService: MenuService) {
     this.parameters = this.fb.group({
       day: [new Date()],
       deliveryManId: []
@@ -50,6 +55,9 @@ export class DeliveryComponent implements OnInit {
       .pipe(
         tap(d => this.isDeliveriesLoading = false)
       );
+    
+    this.menu$ = this.menuService.getMenusByDates(day, day, true)
+        .pipe(map(menus => menus.length > 0 ? menus[0] : null));
   }
 
   updateClientDeliveryPosition(params: {clientIdToUpdate: number, newDeliveryPosition : number}): void {

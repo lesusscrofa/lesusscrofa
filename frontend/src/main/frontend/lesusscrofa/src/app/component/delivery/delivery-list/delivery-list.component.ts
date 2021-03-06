@@ -5,6 +5,7 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import { ClientService } from 'src/app/service/client.service';
+import { Menu } from 'src/app/model/menu';
 
 @Component({
   selector: 'app-delivery-list',
@@ -19,7 +20,10 @@ export class DeliveryListComponent implements OnInit, AfterViewInit {
   @Input()
   isLoading: boolean;
 
-  displayedColumns: string[] = ['deliveryPosition', 'firstName', 'lastName', "soupQuantity", "dishQuantity", "alternativeDishQuantity", "dessertQuantity", "others"];
+  @Input()
+  menu: Menu;
+
+  displayedColumns: string[] = ['deliveryPosition', 'firstName', 'lastName', 'deliveryStreet', 'deliveryZipCode', 'deliveryCity', 'deliveryPhone', "soupQuantity", "dishQuantity", "alternativeDishQuantity", "dessertQuantity", "others"];
 
   dataSource: MatTableDataSource<DeliveryView>;
 

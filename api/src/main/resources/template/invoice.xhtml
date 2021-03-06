@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+<head>
+    <title>Facture</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+
+    <style>
+        .container {
+            width:100%;
+            margin: auto;
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+            padding-bottom: 20px;
+        }
+
+        .container:after {
+            content: ".";
+            visibility: hidden;
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        .left {
+            float:left;
+        }
+
+        .right {
+            float:right;
+        }
+
+        .center {
+            margin:0 auto;
+        }
+
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+        table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        table tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        table tr.item td{
+            border-bottom: 1px solid #eee;
+        }
+
+        table tr.item.last td {
+            border-bottom: none;
+        }
+
+        table tr.total {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        .right {
+
+        }
+
+        .w100 {
+            width: 25%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .rtl table {
+            text-align: right;
+        }
+
+        .rtl table tr td:nth-child(2) {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <img th:src="@{classpath:logo/lesusscrofa.png}" width="100px" height="100px" /><br />
+            Le Sus Scrofa<br />
+            36 rue de la station<br />
+            5680 Matagne-la-Grande<br/>
+            Belgique
+        </div>
+        <div class="right">
+            <br/>
+            <br/>
+            <br/>
+            <span th:text="${data.client.firstName}" /> <span th:text="${data.client.lastName}" /><br />
+            <span th:text="${data.client.billingStreet}" /><br />
+            <span th:text="${data.client.billingZipCode}" /> <span th:text="${data.client.billingCity}" /><br />
+            <span th:text="${data.client.billingPhone}" /><br />
+            <span th:text="${data.client.billingEmail}" />
+        </div>
+    </div>
+
+    <div class="container">
+        Date de facturation <span th:text="${data.createDate}" /><br />
+        Facture n°<br />
+        Numéro de client<br />
+        Paiement dû<br />
+        Modalité de paiement<br />
+        Emis par<br />
+    </div>
+
+    <p>Le Sus Scrofa vous remercie de votre confiance</p>
+
+    <table>
+        <tr class="heading">
+            <td>
+                Description
+            </td>
+            <td>
+                Qts
+            </td>
+            <td>
+                Uts
+            </td>
+            <td>
+                Prix unitaire TVAC
+            </td>
+            <td>
+                Prix unitaire HT
+            </td>
+            <td>
+                TVA %
+            </td>
+            <td>
+                TVA
+            </td>
+            <td>
+                Total TTC
+            </td>
+        </tr>
+
+        <tr class="item" th:each="orderSummary : ${data.ordersSummaries}">
+            <td>
+                <span th:text="${orderSummary.description}" />
+            </td>
+            <td>
+                <span th:text="${orderSummary.quantity}" />
+            </td>
+            <td>
+                <span th:text="${orderSummary.unit}" />
+            </td>
+            <td>
+                <span th:text="${orderSummary.unitPriceVatIncluded}" /> €
+            </td>
+            <td>
+                <span th:text="${orderSummary.unitPriceReductionIncluded}" /> €
+            </td>
+            <td>
+                <span th:text="${orderSummary.vat}" /> %
+            </td>
+            <td>
+                <span th:text="${orderSummary.totalVat}" /> €
+            </td>
+            <td>
+                <span th:text="${orderSummary.totalVatIncluded}" /> €
+            </td>
+        </tr>
+    </table>
+
+    <img th:src="@{classpath:logo/traiteur.png}" width="20%" height="20%" />
+    <img th:src="@{classpath:logo/restaurant.png}" width="20%" height="20%" />
+
+    <div class="container">
+        <table class="right w100">
+            <tr>
+                <td>
+                    Total HT <span th:text="${data.totalVatExcluded}" /> €
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    TVA <span th:text="${data.totalVat}" /> €
+                </td>
+            </tr>
+            <tr class="total">
+                <td>
+                    Total TTC <span th:text="${data.totalVatIncluded}" /> €
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr />
+
+    <div class="container">
+        <div class="left">
+            <b>Le Sus Scrofa</b><br/>
+            36 rue de la station<br/>
+            5680 Matagne la grande<br/>
+            Belgique<br/>
+            No. TVA BE0828809372
+        </div>
+        <div class="center">
+            <b>Contact</b><br/>
+            Le Sus Scrofa<br/>
+            Téléphone 003260399522<br/>
+            Gsm 0475331904<br/>
+            Email: 	info@lesusscrofa.be
+        </div>
+        <div class="right">
+            <b>Détails bancaires</b><br/>
+            BNP Paribas Fortis<br/>
+            Repas à emporter<br/>
+            IBAN: BE51001804458462
+        </div>
+    </div>
+</body>
+</html>

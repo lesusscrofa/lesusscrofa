@@ -17,6 +17,7 @@
 </form>
 
 <app-delivery-list 
+    [menu]="menu$ | async"
     [deliveries]="deliveries$ | async" 
     [isLoading]="isDeliveriesLoading"
     (updateClientDeliveryPosition)="updateClientDeliveryPosition($event)"></app-delivery-list>

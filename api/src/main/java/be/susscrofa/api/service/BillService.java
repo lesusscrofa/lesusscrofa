@@ -19,10 +19,12 @@ public class BillService {
 
     private final OrderWithPriceRepository orderWithPriceRepository;
 
-    public Bill getBill(long clientId, LocalDate from, LocalDate to) {
+    private final PDFService pdfService;
+
+    public byte[] getBill(long clientId, LocalDate from, LocalDate to) {
         Client client = clientService.getClient(clientId);
 
-        return Bill.createBill(client, from, to, this.orderFactory(client));
+        return pdfService.createPdf("invoice.xhtml", Bill.createBill(client, from, to, this.orderFactory(client)));
     }
 
     private BiFunction<LocalDate, LocalDate, List<OrderSummary>> orderFactory(Client client) {
